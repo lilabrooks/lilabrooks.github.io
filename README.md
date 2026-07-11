@@ -12,6 +12,19 @@ The source for [lilabrooks.github.io](https://lilabrooks.github.io), Lila Brooks
 
 The site is plain HTML and CSS. It has no package manager, framework, build step, or runtime dependency.
 
+## Test locally
+
+From Terminal, start a local web server in the repository root:
+
+```bash
+cd /Users/lilabrooks/Documents/lilabrooks.github.io
+python3 -m http.server 8000
+```
+
+Open [http://localhost:8000](http://localhost:8000) in a browser. Check the home, work, now, projects, and project detail pages. Internal links and shared assets use root-relative paths, so opening `index.html` directly from Finder will not test the site correctly.
+
+Press `Control+C` in Terminal to stop the server.
+
 ## Add a project
 
 1. Copy `projects/_template.html` into `projects/<project-name>/index.html`.
