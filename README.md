@@ -12,6 +12,10 @@ The source for [lilabrooks.github.io](https://lilabrooks.github.io), Lila Brooks
 
 The site is plain HTML and CSS. It has no package manager, framework, build step, or runtime dependency.
 
+## Typography
+
+The site self-hosts IBM Plex Mono for display and interface text, with IBM Plex Sans for longer reading. The font files are licensed under the SIL Open Font License 1.1; see `fonts/LICENSE.txt`.
+
 ## Test locally
 
 From Terminal, start a local web server in the repository root:
