@@ -1,8 +1,13 @@
+# Operating system files
 .DS_Store
 Thumbs.db
-node_modules/
-.next/
-.vinext/
-dist/
-out/
-.wrangler/
+
+# Editor settings and temporary files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local logs
+*.log
