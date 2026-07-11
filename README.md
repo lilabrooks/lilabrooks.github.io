@@ -1,19 +1,22 @@
 # lilabrooks.github.io
 
-The source for [lilabrooks.github.io](https://lilabrooks.github.io), Lila Brooks’s engineering leadership portfolio.
+The source for [lilabrooks.github.io](https://lilabrooks.github.io), Lila Brooks's engineering leadership site.
 
-## Run locally
+## Site structure
 
-```bash
-npm install
-npm run dev
-```
+- `/` is the landing page.
+- `/work/` covers leadership experience and working methods.
+- `/now/` records current areas of focus.
+- `/projects/` is the project index.
+- Each folder under `/projects/` is a project deep dive.
 
-## Build
+The site is plain HTML and CSS. It has no package manager, framework, build step, or runtime dependency.
 
-The project has two build targets:
+## Add a project
 
-- `npm run build` creates the Sites deployment bundle.
-- `npm run build:pages` creates the static `out/` directory used by GitHub Pages.
+1. Copy `projects/_template.html` into `projects/<project-name>/index.html`.
+2. Replace the marked content with verified repository details.
+3. Add the project to `projects/index.html` and, when useful, the home page.
+4. Check every internal link before pushing.
 
-Pushes to the `main` branch publish the static site through the included GitHub Pages workflow.
+GitHub Pages publishes the repository through `.github/workflows/pages.yml` whenever `main` changes.

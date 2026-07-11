@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repo Pulse | Project note by Lila Brooks</title>
+  <meta name="description" content="The architecture, decisions, and working method behind Repo Pulse, a local dashboard for public GitHub repository health.">
+  <link rel="canonical" href="https://lilabrooks.github.io/projects/repo-pulse/">
+  <meta property="og:title" content="Repo Pulse | Lila Brooks">
+  <meta property="og:description" content="One page for the vital signs of a public GitHub repository.">
+  <meta property="og:image" content="https://lilabrooks.github.io/og.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header shell">
+    <a class="wordmark" href="/" aria-label="Lila Brooks, home"><span class="wordmark-mark">LB</span><span>Lila Brooks</span></a>
+    <nav class="site-nav" aria-label="Primary navigation"><a href="/work/">Work</a><a href="/projects/" aria-current="page">Projects</a><a href="/now/">Now</a><a href="mailto:lila.m.brooks@gmail.com">Contact</a></nav>
+  </header>
+
+  <main id="content">
+    <header class="article-header shell">
+      <div><p class="eyebrow">Project 01</p><p class="page-meta">Repository intelligence</p></div>
+      <div>
+        <h1>Repo Pulse</h1>
+        <p class="dek">A local dashboard that turns six GitHub tabs into one readable answer about a public repository’s recent activity.</p>
+        <div class="article-tags"><span class="tag">Python 3.12+</span><span class="tag">FastAPI</span><span class="tag">GitHub REST API</span><span class="tag">Static dashboard</span></div>
+      </div>
+    </header>
+
+    <div class="article-layout shell">
+      <aside class="article-aside">
+        <dl>
+          <div><dt>Role</dt><dd>Designer and builder</dd></div>
+          <div><dt>Form</dt><dd>Local web service</dd></div>
+          <div><dt>State</dt><dd>Five-minute memory cache</dd></div>
+          <div><dt>Source</dt><dd><a href="https://github.com/lilabrooks/repo-pulse">GitHub repository ↗</a></dd></div>
+        </dl>
+      </aside>
+
+      <article class="article-body">
+        <section class="article-section">
+          <h2>The problem</h2>
+          <p>GitHub has the data needed to judge whether a public repository is active, quiet, dormant, or archived. The answer is scattered across the main page, issues, pull requests, releases, and commit history.</p>
+          <p>Repo Pulse accepts an owner and repository name, gathers those signals, and returns one summary: stars, issue and pull request counts, latest release, 30-day commit activity, and a pulse verdict with clear rules.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>The system</h2>
+          <div class="system-flow" aria-label="Repo Pulse system flow">
+            <div><span>01</span><strong>Repository input</strong></div>
+            <div><span>02</span><strong>FastAPI boundary</strong></div>
+            <div><span>03</span><strong>GitHub API calls</strong></div>
+            <div><span>04</span><strong>Summary and verdict</strong></div>
+          </div>
+          <p>The hand-written dashboard sends one request to the FastAPI service. The service owns GitHub communication, normalizes the responses, separates open issues from open pull requests, calculates the activity window, and returns one stable response contract.</p>
+          <p>A process-local cache holds each repository summary for five minutes. Repeated views stay fast and avoid spending API calls on unchanged data.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>Decisions that shape it</h2>
+          <ol class="decision-list">
+            <li><span>01</span><p><strong>Keep the browser thin.</strong> GitHub credentials and response normalization stay behind the API boundary.</p></li>
+            <li><span>02</span><p><strong>Use a small cache.</strong> Repository data tolerates a five-minute delay, and the cache removes repeated upstream work without adding persistent infrastructure.</p></li>
+            <li><span>03</span><p><strong>Make the verdict mechanical.</strong> Archived overrides every other state. Recent pushes produce active, older pushes produce quiet, and long inactivity produces dormant.</p></li>
+            <li><span>04</span><p><strong>Accept the formats people paste.</strong> The input parser handles owner/repo, GitHub URLs, trailing .git, and extra URL parts before the API sees the identifier.</p></li>
+          </ol>
+        </section>
+
+        <section class="article-section">
+          <h2>How the work is verified</h2>
+          <p>Every GitHub interaction is replaced by an <code>httpx.MockTransport</code> in the test suite. Tests run offline and cover the application boundary without depending on rate limits, repository changes, or credentials.</p>
+          <p>The repository keeps its goal, API contract, frontend behavior, and architecture decisions under <code>docs/</code>. CI checks the tests and the documentation mapping on every change.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>Tradeoffs</h2>
+          <p>The cache disappears when the process restarts and cannot coordinate across multiple workers. That is a deliberate boundary for a local tool. A hosted version would need shared caching, credential handling, and a clearer operating model.</p>
+          <p>The current design accepts GitHub repository identifiers. Resolving arbitrary project homepages would add discovery rules and ambiguous failure cases, so that idea remains recorded as a proposed scope change.</p>
+        </section>
+
+        <nav class="article-nav" aria-label="Project navigation"><a href="/projects/">← All projects</a><a href="/projects/skywatch/">Next: Skywatch →</a></nav>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer shell"><p>© 2026 Lila Brooks</p><a href="#content">Back to top ↑</a></footer>
+</body>
+</html>

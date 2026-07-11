@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skywatch | Project note by Lila Brooks</title>
+  <meta name="description" content="The decision logic, architecture, and verification method behind Skywatch, a local ISS pass digest service.">
+  <link rel="canonical" href="https://lilabrooks.github.io/projects/skywatch/">
+  <meta property="og:title" content="Skywatch | Lila Brooks">
+  <meta property="og:description" content="A service that decides whether tonight's ISS pass is worth stepping outside for.">
+  <meta property="og:image" content="https://lilabrooks.github.io/og.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header shell">
+    <a class="wordmark" href="/" aria-label="Lila Brooks, home"><span class="wordmark-mark">LB</span><span>Lila Brooks</span></a>
+    <nav class="site-nav" aria-label="Primary navigation"><a href="/work/">Work</a><a href="/projects/" aria-current="page">Projects</a><a href="/now/">Now</a><a href="mailto:lila.m.brooks@gmail.com">Contact</a></nav>
+  </header>
+
+  <main id="content">
+    <header class="article-header shell">
+      <div><p class="eyebrow">Project 02</p><p class="page-meta">Scheduled decision service</p></div>
+      <div>
+        <h1>Skywatch</h1>
+        <p class="dek">A local service that joins ISS pass predictions with cloud forecasts, explains the verdict, and sends mail only when tonight is worth looking up.</p>
+        <div class="article-tags"><span class="tag">Python 3.12+</span><span class="tag">Standard library</span><span class="tag">SQLite</span><span class="tag">SMTP</span></div>
+      </div>
+    </header>
+
+    <div class="article-layout shell">
+      <aside class="article-aside">
+        <dl>
+          <div><dt>Role</dt><dd>Designer and builder</dd></div>
+          <div><dt>Form</dt><dd>Always-on local service</dd></div>
+          <div><dt>Data</dt><dd>SQLite history</dd></div>
+          <div><dt>Source</dt><dd><a href="https://github.com/lilabrooks/skywatch">GitHub repository ↗</a></dd></div>
+        </dl>
+      </aside>
+
+      <article class="article-body">
+        <section class="article-section">
+          <h2>The problem</h2>
+          <p>An ISS pass prediction answers when the station crosses the sky. It does not answer the practical question: will the station be visible, high enough to see clearly, and under a usable sky at this location?</p>
+          <p>Skywatch combines pass data and hourly cloud cover into an explainable go, maybe, or skip decision. It keeps the negative answers visible on a local status page and stays quiet unless the next 24 hours contain a worthwhile pass.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>The system</h2>
+          <div class="system-flow" aria-label="Skywatch system flow">
+            <div><span>01</span><strong>Fetch predictions</strong></div>
+            <div><span>02</span><strong>Fetch cloud cover</strong></div>
+            <div><span>03</span><strong>Join and judge</strong></div>
+            <div><span>04</span><strong>Store, show, notify</strong></div>
+          </div>
+          <p>A scheduler fetches ISS pass predictions from sat.terrestre.ar and the hourly forecast from Open-Meteo. The service stores the results in SQLite, matches each pass window to its overlapping forecast hours, calculates a verdict, updates a status page, and decides whether a digest should be sent.</p>
+          <p>Stored results keep the page useful during an upstream outage. Configuration comes from environment variables and an optional local <code>.env</code> file. Invalid configuration fails at startup with one collected error report.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>The decision rules</h2>
+          <ol class="decision-list">
+            <li><span>01</span><p><strong>Skip</strong> when the station is not visible, the pass peaks below 25°, or the worst overlapping cloud forecast is above 70%.</p></li>
+            <li><span>02</span><p><strong>Go</strong> when the pass clears the visibility and elevation gates and cloud cover is at or below 30%.</p></li>
+            <li><span>03</span><p><strong>Maybe</strong> when cloud cover falls between those thresholds or the forecast does not cover the pass window yet.</p></li>
+            <li><span>04</span><p><strong>Notify once.</strong> The service sends at most one digest per day and only when a go or maybe pass exists in the next 24 hours.</p></li>
+          </ol>
+          <p>The status page includes the reason behind each verdict. A useful decision service should explain silence as well as action.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>How the work is verified</h2>
+          <p>The application runtime uses the Python standard library. Tests use recorded upstream fixtures and run offline. The demo shifts fixture timestamps so a clear-sky pass always lands tonight, then exercises the real decision and SMTP path against a local inbox.</p>
+          <p>This makes the demo deterministic. Weather and orbital timing cannot turn a known test into a shrug.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>Tradeoffs</h2>
+          <p>Latitude and longitude are the v1 location boundary. Address lookup would add a geocoding provider, more failure modes, and another privacy choice.</p>
+          <p>The verdict uses fixed thresholds. They are easy to inspect and tune, though they cannot express every observer’s preference or local viewing condition. The reasons remain explicit so the user can disagree with the decision.</p>
+        </section>
+
+        <nav class="article-nav" aria-label="Project navigation"><a href="/projects/repo-pulse/">← Repo Pulse</a><a href="/projects/claude-okf-repo-kit/">Next: Claude OKF repo kit →</a></nav>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer shell"><p>© 2026 Lila Brooks</p><a href="#content">Back to top ↑</a></footer>
+</body>
+</html>

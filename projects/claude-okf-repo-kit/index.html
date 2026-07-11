@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude OKF repo kit | Project note by Lila Brooks</title>
+  <meta name="description" content="The logic and working method behind Claude OKF repo kit, a project knowledge structure for Claude Code repositories.">
+  <link rel="canonical" href="https://lilabrooks.github.io/projects/claude-okf-repo-kit/">
+  <meta property="og:title" content="Claude OKF repo kit | Lila Brooks">
+  <meta property="og:description" content="A repository knowledge system for agent-assisted engineering work.">
+  <meta property="og:image" content="https://lilabrooks.github.io/og.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header shell">
+    <a class="wordmark" href="/" aria-label="Lila Brooks, home"><span class="wordmark-mark">LB</span><span>Lila Brooks</span></a>
+    <nav class="site-nav" aria-label="Primary navigation"><a href="/work/">Work</a><a href="/projects/" aria-current="page">Projects</a><a href="/now/">Now</a><a href="mailto:lila.m.brooks@gmail.com">Contact</a></nav>
+  </header>
+
+  <main id="content">
+    <header class="article-header shell">
+      <div><p class="eyebrow">Project 03</p><p class="page-meta">Repository knowledge system</p></div>
+      <div>
+        <h1>Claude OKF repo kit</h1>
+        <p class="dek">A repeatable repository structure that gives Claude Code the project goal, behavior contracts, architecture decisions, and verification rules before it edits code.</p>
+        <div class="article-tags"><span class="tag">Claude Code</span><span class="tag">OKF 0.1</span><span class="tag">Bash</span><span class="tag">Specs and ADRs</span></div>
+      </div>
+    </header>
+
+    <div class="article-layout shell">
+      <aside class="article-aside">
+        <dl>
+          <div><dt>Role</dt><dd>Designer and maintainer</dd></div>
+          <div><dt>Form</dt><dd>Installable repo kit</dd></div>
+          <div><dt>Status</dt><dd>Preview</dd></div>
+          <div><dt>Source</dt><dd><a href="https://github.com/lilabrooks/claude-okf-repo-kit">GitHub repository ↗</a></dd></div>
+        </dl>
+      </aside>
+
+      <article class="article-body">
+        <section class="article-section">
+          <h2>The problem</h2>
+          <p>A coding agent can read source code and still miss the reason the system looks the way it does. Goals, constraints, rejected options, and verification habits often live in chat history or in someone’s head.</p>
+          <p>The repo kit moves that knowledge into version control. Claude Code starts with the project goal and knowledge indexes in context, then follows the relevant specifications and architecture decisions when it changes governed files.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>The knowledge model</h2>
+          <div class="system-flow" aria-label="Claude OKF repo kit knowledge model">
+            <div><span>01</span><strong>Goal and milestones</strong></div>
+            <div><span>02</span><strong>Behavior specs</strong></div>
+            <div><span>03</span><strong>Architecture decisions</strong></div>
+            <div><span>04</span><strong>Source mappings</strong></div>
+          </div>
+          <p><code>CLAUDE.md</code> defines the project rules and imports the goal plus the spec and ADR indexes. <code>docs/GOAL.md</code> holds the problem, target state, success criteria, and milestone backlog. Specs describe behavior. ADRs record decisions and consequences. An OKF map connects source paths to the knowledge that governs them.</p>
+          <p>Hooks watch for code changes that leave the related knowledge stale. A small command-line helper checks draft specs, stale references, and places where an architecture decision may be needed.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>The working loop</h2>
+          <ol class="decision-list">
+            <li><span>01</span><p>State the goal and ordered milestones before asking an agent to implement features.</p></li>
+            <li><span>02</span><p>Write behavior contracts and architecture decisions beside the source they govern.</p></li>
+            <li><span>03</span><p>Have the agent read the mapped knowledge before editing a source area.</p></li>
+            <li><span>04</span><p>Run repository checks that catch code changes without matching knowledge updates.</p></li>
+          </ol>
+          <p>The goal is a smaller gap between what the team means and what the agent can see.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>Decisions that shape it</h2>
+          <h3>Version the reasoning</h3>
+          <p>Project intent changes with the code and should travel through the same review history. Markdown keeps the knowledge readable to people, agents, and ordinary repository tooling.</p>
+          <h3>Map knowledge to source</h3>
+          <p>A large documentation folder is easy to ignore. The OKF map narrows the reading set to the specs and decisions connected to the files being changed.</p>
+          <h3>Use guardrails as feedback</h3>
+          <p>The hooks flag stale knowledge at the moment it matters. They turn documentation upkeep into part of the implementation loop.</p>
+        </section>
+
+        <section class="article-section">
+          <h2>Tradeoffs</h2>
+          <p>The structure asks for writing before and during implementation. Small throwaway experiments may not earn that cost. The kit is most useful when a repository will change over time, several decisions need to survive, or agent sessions need a shared memory.</p>
+          <p>Hooks can detect likely gaps. They cannot prove that a specification is correct or that an ADR captures the real reasoning. Review still belongs to people.</p>
+        </section>
+
+        <nav class="article-nav" aria-label="Project navigation"><a href="/projects/skywatch/">← Skywatch</a><a href="/projects/spec-agent-cli/">Next: Spec Agent CLI →</a></nav>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer shell"><p>© 2026 Lila Brooks</p><a href="#content">Back to top ↑</a></footer>
+</body>
+</html>
