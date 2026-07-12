@@ -1,38 +1,34 @@
 # lilabrooks.github.io
 
-The source for [lilabrooks.github.io](https://lilabrooks.github.io), an explanation of the intent and mechanism behind the Claude OKF repo kit.
+This repository publishes the **apex** site at [lilabrooks.github.io](https://lilabrooks.github.io). It is a thin publish shell: the site itself is not authored here.
 
-## Site structure
+## Where the site lives
 
-- `/` explains the kit’s theory, knowledge model, working loop, and control boundaries.
-- `/dogfood/` records what Spec Agent CLI, Repo Pulse, and Skywatch taught the kit.
+The site source is a single governed source in the **Claude OKF repo kit** repository, under its [`site/`](https://github.com/lilabrooks/claude-okf-repo-kit/tree/main/site) folder (kit ADR 0016). That same `site/` is served two ways:
 
-Legacy `/now/`, `/notes/`, and `/projects/` URLs contain redirect pages for previously published links.
+- the kit repo's own Pages workflow serves it at `https://lilabrooks.github.io/claude-okf-repo-kit/`, and
+- this repository includes the kit as a git submodule at `_kit/` and deploys `_kit/site` at the apex,
 
-The site is plain HTML and CSS. It has no package manager, framework, build step, or runtime dependency.
+so both URLs render the identical editorial site. All paths in the site are relative, so the same files work at both bases; absolute canonical, Open Graph, and schema.org URLs point at the apex, marking it primary.
 
-## Typography
+## Update the site
 
-The site self-hosts IBM Plex Mono for display and interface text, with IBM Plex Sans for longer reading. The font files are licensed under the SIL Open Font License 1.1; see `fonts/LICENSE.txt`.
-
-## Test locally
-
-From Terminal, start a local web server in the repository root:
+Edit the site in the kit repo (`site/`), not here. To then move the apex to the latest:
 
 ```bash
-cd /Users/lilabrooks/Documents/lilabrooks.github.io
+git submodule update --remote _kit
+git commit -am "Bump site to latest kit"
+git push
+```
+
+Pushing to `main` triggers `.github/workflows/pages.yml`, which checks out the submodule and deploys `_kit/site`.
+
+## Local preview
+
+```bash
+git submodule update --init _kit
+cd _kit/site
 python3 -m http.server 8000
 ```
 
-Open [http://localhost:8000](http://localhost:8000) in a browser. Check the home page, dogfood page, and the links to each source repository. Internal links and shared assets use root-relative paths, so opening `index.html` directly from Finder will not test the site correctly.
-
-Press `Control+C` in Terminal to stop the server.
-
-## Update the dogfood record
-
-1. Read the target repository’s goal, documentation log, specifications, decisions, and relevant commit history.
-2. Update `/dogfood/index.html` with the use case, observed finding, and the corresponding kit change.
-3. Keep causal claims tied to a kit decision record, goal milestone, or dated log entry.
-4. Check every internal link before pushing.
-
-GitHub Pages publishes the repository through `.github/workflows/pages.yml` whenever `main` changes.
+Open [http://localhost:8000](http://localhost:8000). The site uses relative paths, so it also previews correctly from a subpath (e.g. `http://localhost:8000/` served one level up).
