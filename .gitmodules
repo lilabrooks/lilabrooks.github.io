@@ -1,3 +1,4 @@
 [submodule "_kit"]
 	path = _kit
 	url = https://github.com/lilabrooks/claude-okf-repo-kit.git
+	branch = main
