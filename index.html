@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lila Brooks | Software project notes</title>
-  <meta name="description" content="Notes on software projects, current experiments, and the engineering decisions behind them.">
+  <title>Claude OKF repo kit | Lila Brooks</title>
+  <meta name="description" content="The intent and mechanism behind the Claude OKF repo kit: repository memory for goal-driven work with Claude Code.">
   <link rel="canonical" href="https://lilabrooks.github.io/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Lila Brooks | Software project notes">
-  <meta property="og:description" content="Current software work and the reasoning kept alongside it.">
+  <meta property="og:title" content="Claude OKF repo kit">
+  <meta property="og:description" content="A repository carries the goal, contracts, decisions, and progress that need to survive a coding session.">
   <meta property="og:url" content="https://lilabrooks.github.io/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
@@ -16,102 +16,152 @@
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
   <header class="site-header shell">
-    <a class="wordmark" href="/" aria-label="Lila Brooks, home">
-      <span class="wordmark-mark">LB</span>
-      <span>Lila Brooks</span>
+    <a class="wordmark" href="/" aria-label="Claude OKF repo kit, home">
+      <span class="wordmark-mark">OKF</span>
+      <span>Claude OKF repo kit</span>
     </a>
     <nav class="site-nav" aria-label="Primary navigation">
-      <a href="/now/">Now</a>
-      <a href="/projects/">Projects</a>
-      <a href="/notes/">Notes</a>
-      <a href="https://github.com/lilabrooks">GitHub</a>
+      <a href="/" aria-current="page">The kit</a>
+      <a href="/dogfood/">Dogfood</a>
+      <a href="https://github.com/lilabrooks/claude-okf-repo-kit">Source</a>
     </nav>
   </header>
 
   <main id="content">
     <section class="hero shell" aria-labelledby="hero-title">
       <div>
-        <p class="eyebrow">A working notebook for software projects</p>
-        <h1 id="hero-title">Software I’m working on, and the <em>reasoning behind it.</em></h1>
+        <p class="eyebrow">Claude Code · Open Knowledge Format</p>
+        <h1 id="hero-title">A repository that carries its own <em>intent.</em></h1>
       </div>
       <div class="hero-aside">
-        <p class="intro">I use this site for notes that need more room than a README: why a tool exists, how its boundaries were drawn, what changed during implementation, and what remains unresolved.</p>
+        <p class="intro">The Claude OKF repo kit gives Claude Code a stable account of the goal, the behavior it must preserve, the decisions already made, and the work still open.</p>
         <div class="signal">
-          <strong>Current work</strong>
-          <p>Small local services, repository knowledge, agent workflows, and practical platform questions.</p>
+          <strong>Working premise</strong>
+          <p>The conversation is temporary. The repository is the memory.</p>
         </div>
       </div>
     </section>
 
-    <section class="section shell" aria-labelledby="explore-title">
+    <section class="section shell" aria-labelledby="intent-title">
       <div class="section-head">
-        <p class="eyebrow">On this site</p>
+        <p class="eyebrow">The intent</p>
         <div>
-          <h2 id="explore-title">A record of work in progress.</h2>
-          <p>The pages here follow active projects and the questions around them. Details may change as the repositories change.</p>
+          <h2 id="intent-title">Code needs the reasoning around it.</h2>
+          <p>A source tree shows what exists today. It rarely explains why a boundary exists, which compromise was accepted, whether a change contradicts the goal, or where the last session stopped.</p>
         </div>
       </div>
-      <div class="path-grid">
-        <a class="path-card" href="/now/">
-          <span class="number">01</span><span class="card-arrow" aria-hidden="true">↗</span>
-          <h3>Now</h3>
-          <p>The repositories on my desk, the questions I’m following, and the subjects I’m reading about.</p>
-        </a>
-        <a class="path-card" href="/projects/">
-          <span class="number">02</span><span class="card-arrow" aria-hidden="true">↗</span>
-          <h3>Projects</h3>
-          <p>Longer notes on a repository’s problem, system boundaries, decisions, tests, and tradeoffs.</p>
-        </a>
-        <a class="path-card" href="/notes/">
-          <span class="number">03</span><span class="card-arrow" aria-hidden="true">↗</span>
-          <h3>Notes</h3>
-          <p>Working methods and recurring engineering questions that cut across individual projects.</p>
-        </a>
-        <a class="path-card" href="https://github.com/lilabrooks">
-          <span class="number">04</span><span class="card-arrow" aria-hidden="true">↗</span>
-          <h3>GitHub</h3>
-          <p>Source code, tests, specifications, architecture records, and issue history.</p>
-        </a>
+      <div class="essay-grid">
+        <p>The kit treats project intent as maintained repository data. Its document conventions build on the <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md">Open Knowledge Format</a>; the goal loop, source map, and Claude Code guardrails make those conventions operational.</p>
+        <p>Claude Code begins each session with a compact view of that knowledge. It reads the full documents connected to the current task, makes the smallest change that satisfies the goal, and leaves the repository with a current account of what changed and why.</p>
       </div>
     </section>
 
-    <section class="project-strip shell" aria-labelledby="projects-title">
-      <p class="eyebrow" id="projects-title">Recent project notes</p>
-      <ol class="project-list">
+    <section class="section shell" aria-labelledby="model-title">
+      <div class="section-head">
+        <p class="eyebrow">The knowledge model</p>
+        <div>
+          <h2 id="model-title">Different questions belong in different records.</h2>
+          <p>The structure is deliberately small. Each part answers one kind of question, and the source map connects the pieces needed for a change.</p>
+        </div>
+      </div>
+      <div class="principle-grid">
+        <article class="principle">
+          <h3>The goal sets direction</h3>
+          <p>The goal names the problem, target state, success criteria, non-goals, constraints, and ordered milestones. Its scope and order remain the owner’s decisions.</p>
+        </article>
+        <article class="principle">
+          <h3>Specs state behavior</h3>
+          <p>Specifications describe the contracts the implementation must preserve: inputs, outputs, failure cases, and acceptance conditions.</p>
+        </article>
+        <article class="principle">
+          <h3>ADRs preserve reasoning</h3>
+          <p>Architecture decision records hold the context, chosen option, consequences, and revisit trigger for decisions that should outlive one session.</p>
+        </article>
+        <article class="principle">
+          <h3>The map narrows context</h3>
+          <p>A source-to-knowledge map points each part of the codebase to its governing specs and decisions. This keeps each session’s reading set small and specific.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="mechanism-title">
+      <div class="section-head">
+        <p class="eyebrow">The mechanism</p>
+        <div>
+          <h2 id="mechanism-title">Context becomes a repeatable working loop.</h2>
+          <p>The kit turns the repository’s knowledge into session behavior. It provides a path from stated intent to a verified change and a record the next session can trust.</p>
+        </div>
+      </div>
+      <div class="system-flow" aria-label="Claude OKF repo kit working loop">
+        <div><span>01</span><strong>Load the goal and indexes</strong></div>
+        <div><span>02</span><strong>Read the knowledge mapped to the task</strong></div>
+        <div><span>03</span><strong>Change code and governing records together</strong></div>
+        <div><span>04</span><strong>Verify, log, and continue</strong></div>
+      </div>
+      <ol class="mechanism-list">
         <li>
-          <span class="number">01</span>
-          <h3><a href="/projects/repo-pulse/">Repo Pulse</a></h3>
-          <p>A local dashboard that condenses the vital signs of a public GitHub repository into one view.</p>
-          <a href="/projects/repo-pulse/" aria-label="Read the Repo Pulse project note">↗</a>
+          <span>Session context</span>
+          <p>The project instructions preload the goal plus the spec and ADR indexes. Full documents stay on disk until the current work calls for them.</p>
         </li>
         <li>
-          <span class="number">02</span>
-          <h3><a href="/projects/skywatch/">Skywatch</a></h3>
-          <p>An always-on service that decides when an ISS pass is worth stepping outside for.</p>
-          <a href="/projects/skywatch/" aria-label="Read the Skywatch project note">↗</a>
+          <span>Goal-directed work</span>
+          <p>A general request to continue means taking the first unfinished milestone, reading its governing knowledge, and working until its stated verification passes.</p>
         </li>
         <li>
-          <span class="number">03</span>
-          <h3><a href="/projects/claude-okf-repo-kit/">Claude OKF repo kit</a></h3>
-          <p>A repository structure that gives coding agents durable project knowledge and guardrails.</p>
-          <a href="/projects/claude-okf-repo-kit/" aria-label="Read the Claude OKF repo kit project note">↗</a>
+          <span>Knowledge sync</span>
+          <p>Behavior changes carry matching spec, decision, mapping, or log updates. A stop-time check catches code changes that leave the repository’s account behind.</p>
         </li>
         <li>
-          <span class="number">04</span>
-          <h3><a href="/projects/spec-agent-cli/">Spec Agent CLI</a></h3>
-          <p>A Python CLI for turning Markdown specifications into reviewed file plans and generated code.</p>
-          <a href="/projects/spec-agent-cli/" aria-label="Read the Spec Agent CLI project note">↗</a>
+          <span>Recorded decisions</span>
+          <p>Dependencies, persistence, APIs, security boundaries, and deployment choices become proposed ADRs. The owner can review them without interrupting each implementation step.</p>
+        </li>
+        <li>
+          <span>Completion and resumption</span>
+          <p>Milestones close after verification. A final acceptance pass uses the project like a new user would. Checkboxes, logs, ADRs, commits, and in-flight changes give the next session a precise restart point.</p>
         </li>
       </ol>
     </section>
 
-    <section class="cta shell" aria-labelledby="next-title">
-      <p class="eyebrow">Working record</p>
-      <h2 id="next-title">The notes change with the code.</h2>
-      <p>I update these pages when a project’s design changes or a useful question survives the implementation.</p>
-      <div class="button-row">
-        <a class="button primary" href="/now/">Current work</a>
-        <a class="button" href="https://github.com/lilabrooks">Browse source</a>
+    <section class="section working-set" aria-labelledby="control-title">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Control boundaries</p>
+          <div>
+            <h2 id="control-title">The owner keeps the consequential decisions.</h2>
+            <p>The kit gives Claude Code room to work inside a written contract. Changes to that contract remain visible and reviewable.</p>
+          </div>
+        </div>
+        <ul class="working-set-list">
+          <li><span class="status">Owner</span><h3>Goal and scope</h3><p>The owner sets the goal, changes milestone order, and decides when a non-goal should move.</p></li>
+          <li><span class="status">Agent</span><h3>Implementation</h3><p>Claude Code makes implementation choices inside the goal, accepted decisions, specifications, and standing guardrails.</p></li>
+          <li><span class="status">Review</span><h3>Proposed decisions</h3><p>Decision-shaped changes are written down with their consequences and rollback conditions, then left for owner review.</p></li>
+          <li><span class="status">Consent</span><h3>External effects</h3><p>Publishing, deployment, destructive changes, and outside actions with side effects wait for explicit approval.</p></li>
+        </ul>
+        <div class="limit-note">
+          <p><strong>The enforcement boundary matters.</strong> Documentation sync and local environment-file read denial are mechanical gates. Test discipline, security rules, and consent rules are instructions Claude Code is expected to follow. Repositories that require guaranteed gates should enforce them in CI and branch protection.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="evidence-title">
+      <div class="section-head">
+        <p class="eyebrow">Evidence from use</p>
+        <div>
+          <h2 id="evidence-title">The kit changes when real repositories find a weak spot.</h2>
+          <p>Three dogfood repositories exercised the model with a packaged Python CLI, a small web application, and an always-on scheduled service. Their findings became changes to the kit’s interviews, hooks, upgrade policy, mapping guidance, and review loop.</p>
+        </div>
+      </div>
+      <div class="path-grid">
+        <a class="path-card" href="/dogfood/">
+          <span class="number">01 · Dogfood record</span><span class="card-arrow" aria-hidden="true">↗</span>
+          <h3>What the repositories taught the kit</h3>
+          <p>A short account of each use case, the failure or gap it exposed, and the change carried back into the source kit.</p>
+        </a>
+        <a class="path-card" href="https://github.com/lilabrooks/claude-okf-repo-kit">
+          <span class="number">02 · Source</span><span class="card-arrow" aria-hidden="true">↗</span>
+          <h3>Read the repository</h3>
+          <p>The goal, specifications, decision records, templates, tests, and change log are public.</p>
+        </a>
       </div>
     </section>
   </main>
