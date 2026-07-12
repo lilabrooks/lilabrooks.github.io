@@ -4,11 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Now | Lila Brooks</title>
-  <meta name="description" content="What Lila Brooks is focused on and working through in July 2026.">
+  <meta name="description" content="A July 2026 note on the software projects and engineering questions currently in progress.">
   <link rel="canonical" href="https://lilabrooks.github.io/now/">
   <meta property="og:title" content="Now | Lila Brooks">
-  <meta property="og:description" content="Current work and questions across platform engineering, agent workflows, and local-first tools.">
-  <meta property="og:image" content="https://lilabrooks.github.io/og.png">
+  <meta property="og:description" content="Software projects and engineering questions currently in progress.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -17,39 +16,39 @@
   <header class="site-header shell">
     <a class="wordmark" href="/" aria-label="Lila Brooks, home"><span class="wordmark-mark">LB</span><span>Lila Brooks</span></a>
     <nav class="site-nav" aria-label="Primary navigation">
-      <a href="/work/">Work</a><a href="/projects/">Projects</a><a href="/now/" aria-current="page">Now</a><a href="mailto:lila.m.brooks@gmail.com">Contact</a>
+      <a href="/now/" aria-current="page">Now</a><a href="/projects/">Projects</a><a href="/notes/">Notes</a><a href="https://github.com/lilabrooks">GitHub</a>
     </nav>
   </header>
 
   <main id="content">
     <header class="page-hero shell">
       <div><p class="eyebrow">Now</p><p class="page-meta">Updated July 2026</p></div>
-      <div><h1>What I’m focused on.</h1><p class="dek">This page is a working note. It records the systems I’m building, the engineering questions I keep returning to, and the methods I’m testing in public repositories.</p></div>
+      <div><h1>What I’m working on now.</h1><p class="dek">This is a dated working note about the repositories on my desk and the questions I’m carrying between them.</p></div>
     </header>
 
     <section class="section shell" aria-labelledby="focus-title">
-      <div class="section-head"><p class="eyebrow">Current themes</p><div><h2 id="focus-title">Four threads in the work.</h2><p>They overlap: the same choices about boundaries, feedback, and ownership show up in platform teams and small software tools.</p></div></div>
+      <div class="section-head"><p class="eyebrow">Current threads</p><div><h2 id="focus-title">Questions that are still moving.</h2><p>Some have code behind them. Others are still notes, sketches, or constraints I’m trying to understand.</p></div></div>
       <div class="focus-grid">
-        <article class="focus-item"><span class="focus-number">01</span><h2>Agent work people can inspect</h2><p>Using goals, behavior specs, architecture decisions, and verification commands to keep AI-assisted development tied to explicit intent.</p></article>
+        <article class="focus-item"><span class="focus-number">01</span><h2>Agent work that can be inspected</h2><p>Using goals, behavior specs, architecture decisions, and verification commands to keep AI-assisted development tied to explicit intent.</p></article>
         <article class="focus-item"><span class="focus-number">02</span><h2>Small local-first services</h2><p>Building tools that solve one recurring problem, keep their data close, and remain understandable without a large runtime stack.</p></article>
-        <article class="focus-item"><span class="focus-number">03</span><h2>Platform operating models</h2><p>Working through platform roadmaps, service intake, team charters, ownership, and cloud migration decisions as one connected system.</p></article>
-        <article class="focus-item"><span class="focus-number">04</span><h2>Applied AI inside real workflows</h2><p>Following the gap between a good model demo and a production tool with clear boundaries, evaluation, observability, and human judgment.</p></article>
+        <article class="focus-item"><span class="focus-number">03</span><h2>Platform boundaries</h2><p>Working through service ownership, intake, roadmaps, and cloud migration decisions as parts of the same operating problem.</p></article>
+        <article class="focus-item"><span class="focus-number">04</span><h2>Applied AI in ordinary workflows</h2><p>Studying the distance between a useful model demo and a maintained tool with explicit boundaries, evaluation, operating signals, and human judgment.</p></article>
       </div>
     </section>
 
     <section class="section working-set" aria-labelledby="working-title">
       <div class="shell">
-        <div class="section-head"><p class="eyebrow">Working set</p><div><h2 id="working-title">The repositories on my desk.</h2><p>Each project tests a different part of the same idea: useful software begins with a clear problem and keeps its reasoning close to the code.</p></div></div>
+        <div class="section-head"><p class="eyebrow">Working set</p><div><h2 id="working-title">The repositories on my desk.</h2><p>Each one is small enough to inspect. I’m using them to test ways of keeping intent, code, and verification in the same place.</p></div></div>
         <ul class="working-set-list">
           <li><span class="status">Building</span><h3><a href="/projects/repo-pulse/">Repo Pulse</a></h3><p>A compact view of repository activity, with API contracts, a small cache, and offline tests.</p></li>
           <li><span class="status">Building</span><h3><a href="/projects/skywatch/">Skywatch</a></h3><p>A scheduled decision service that joins orbital pass predictions with cloud forecasts and sends mail only when the result is useful.</p></li>
           <li><span class="status">Developing</span><h3><a href="/projects/claude-okf-repo-kit/">Claude OKF repo kit</a></h3><p>A repeatable repository knowledge system for agent-assisted engineering work.</p></li>
-          <li><span class="status">Documenting</span><h3><a href="/projects/">Project notes</a></h3><p>Turning repository READMEs and architecture records into readable case studies about the logic behind the code.</p></li>
+          <li><span class="status">Documenting</span><h3><a href="/projects/">Project notes</a></h3><p>Turning repository READMEs and architecture records into longer explanations of the logic behind the code.</p></li>
         </ul>
       </div>
     </section>
 
-    <section class="cta shell"><p class="eyebrow">Follow the work</p><h2>The commits are public.</h2><p>Source, tests, specs, and architecture records live with the projects on GitHub.</p><div class="button-row"><a class="button primary" href="https://github.com/lilabrooks">View GitHub</a><a class="button" href="/projects/">Read project notes</a></div></section>
+    <section class="cta shell"><p class="eyebrow">Source</p><h2>The repositories carry the evidence.</h2><p>Source, tests, specifications, and architecture records live with the projects on GitHub.</p><div class="button-row"><a class="button primary" href="https://github.com/lilabrooks">Browse GitHub</a><a class="button" href="/projects/">Read project notes</a></div></section>
   </main>
   <footer class="site-footer shell"><p>© 2026 Lila Brooks</p><a href="#content">Back to top ↑</a></footer>
 </body>

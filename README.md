@@ -1,14 +1,14 @@
 # lilabrooks.github.io
 
-The source for [lilabrooks.github.io](https://lilabrooks.github.io), Lila Brooks's engineering leadership site.
+The source for [lilabrooks.github.io](https://lilabrooks.github.io), a working notebook about current software projects and the reasoning behind them.
 
 ## Site structure
 
 - `/` is the landing page.
-- `/work/` covers leadership experience and working methods.
-- `/now/` records current areas of focus.
-- `/projects/` is the project index.
-- Each folder under `/projects/` is a project deep dive.
+- `/now/` records the current working set and open questions.
+- `/projects/` is the project-note index.
+- Each named folder under `/projects/` contains a note about one repository.
+- `/notes/` collects methods and questions that recur across projects.
 
 The site is plain HTML and CSS. It has no package manager, framework, build step, or runtime dependency.
 
@@ -25,7 +25,7 @@ cd /Users/lilabrooks/Documents/lilabrooks.github.io
 python3 -m http.server 8000
 ```
 
-Open [http://localhost:8000](http://localhost:8000) in a browser. Check the home, work, now, projects, and project detail pages. Internal links and shared assets use root-relative paths, so opening `index.html` directly from Finder will not test the site correctly.
+Open [http://localhost:8000](http://localhost:8000) in a browser. Check the home, now, projects, notes, and project detail pages. Internal links and shared assets use root-relative paths, so opening `index.html` directly from Finder will not test the site correctly.
 
 Press `Control+C` in Terminal to stop the server.
 
