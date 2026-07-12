@@ -11,6 +11,16 @@ The site source is a single governed source in the **Claude OKF repo kit** repos
 
 so both URLs render the identical editorial site. All paths in the site are relative, so the same files work at both bases; absolute canonical, Open Graph, and schema.org URLs point at the apex, marking it primary.
 
+## First-time Pages setup
+
+The apex is served by **GitHub Actions**, not the legacy deploy-from-branch builder. A new `*.github.io` repository auto-enables Pages in `legacy` mode, which serves the repo root and can't reach the `_kit/` submodule — so the build type must be switched once:
+
+```bash
+gh api -X PUT repos/lilabrooks/lilabrooks.github.io/pages -f build_type=workflow
+```
+
+It persists after that; routine pushes deploy through `.github/workflows/pages.yml`. (Settings → Pages → Source: GitHub Actions does the same thing.)
+
 ## Update the site
 
 Edit the site in the kit repo (`site/`), not here. To then move the apex to the latest:
